@@ -1,28 +1,33 @@
-import React, { Component } from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { Component, Fragment } from 'react';
+import { extendObservable } from 'mobx';
+import { observer } from 'mobx-react';
 
 class App extends Component {
-  render() {
-    return (
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <p>
-            Edit <code>src/App.js</code> and save to reload.
-          </p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
-        </header>
-      </div>
-    );
-  }
+    constructor() {
+        super();
+
+        extendObservable(this, {
+            counter: 0
+        })
+    }
+
+    _increment = () => {
+        this.counter++;
+    }
+
+    _decrement = () => {
+        this.counter--;
+    }
+
+    render() {
+        return (
+            <Fragment>
+                <button onClick={this._increment}>Increment</button>
+                <button onClick={this._decrement}>Decrement</button>
+                <h1>Value: {this.counter}</h1>
+            </Fragment>
+        );
+    }
 }
 
-export default App;
+export default observer(App);
