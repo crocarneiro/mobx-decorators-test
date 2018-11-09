@@ -1,14 +1,17 @@
 import React, { Component, Fragment } from 'react';
-import { extendObservable } from 'mobx';
+import { extendObservable, observable } from 'mobx';
 import { observer } from 'mobx-react';
 
+@observer
 class App extends Component {
+    @observable counter = 0;
     constructor() {
         super();
 
+        /*
         extendObservable(this, {
             counter: 0
-        })
+        })*/
     }
 
     _increment = () => {
@@ -30,4 +33,5 @@ class App extends Component {
     }
 }
 
-export default observer(App);
+//export default observer(App);
+export default App;
